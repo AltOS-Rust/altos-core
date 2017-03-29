@@ -19,8 +19,8 @@ syscall = []
 [dependencies]
 bump_allocator = { path = "libs/heap/bump_allocator", optional = true }
 free_list_allocator = { path = "libs/heap/free_list_allocator", optional = true }
-volatile = { path = "../libs/volatile" }
+volatile-ptr = { git = "https://github.com/AltOS-Rust/volatile" }
 altos-macros = { path = "libs/altos-macros" }
 
 [target.thumbv6m-none-eabi.dependencies]
-cm0_atomic = { path = "libs/cm0_atomic" }
+cm0_atomic = { git = "https://github.com/AltOS-Rust/cm0-atomic" }

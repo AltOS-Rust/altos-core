@@ -5,7 +5,7 @@ authors = ["Patrick Douglas <pcdouglas94@gmail.com>"]
 
 # needed for build
 [target.thumbv6m-none-eabi.dependencies]
-cm0_atomic = { path = "../../cm0_atomic" }
+cm0_atomic = { git = "https://github.com/AltOS-Rust/cm0-atomic" }
 
 # needed for testing
 [dependencies]

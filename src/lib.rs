@@ -51,7 +51,7 @@ pub extern crate alloc;
 pub extern crate collections;
 #[cfg(not(target_has_atomic="ptr"))]
 pub extern crate cm0_atomic as atomic;
-pub extern crate volatile;
+pub extern crate volatile_ptr as volatile;
 
 #[cfg(test)]
 #[macro_use]

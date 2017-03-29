@@ -7,4 +7,4 @@ authors = ["Daniel Seitz <dnseitz@gmail.com>"]
 altos-macros = { path = "../../altos-macros" }
 
 [target.thumbv6m-none-eabi.dependencies]
-cm0_atomic = { path = "../../cm0_atomic" }
+cm0_atomic = { git = "https://github.com/AltOS-Rust/cm0-atomic" }
