@@ -1,0 +1,52 @@
+[root]
+name = "altos_core"
+version = "0.1.0"
+dependencies = [
+ "altos-macros 0.1.0",
+ "bump_allocator 0.1.0",
+ "cm0_atomic 0.1.0 (git+https://github.com/AltOS-Rust/cm0-atomic)",
+ "free_list_allocator 0.1.0",
+ "volatile-ptr 0.1.0 (git+https://github.com/AltOS-Rust/volatile)",
+]
+
+[[package]]
+name = "altos-macros"
+version = "0.1.0"
+
+[[package]]
+name = "bump_allocator"
+version = "0.1.0"
+dependencies = [
+ "altos-macros 0.1.0",
+ "cm0_atomic 0.1.0 (git+https://github.com/AltOS-Rust/cm0-atomic)",
+]
+
+[[package]]
+name = "cm0_atomic"
+version = "0.1.0"
+source = "git+https://github.com/AltOS-Rust/cm0-atomic#af8aa89af1613c7d698a1d77478a213290589878"
+
+[[package]]
+name = "cm0_sync"
+version = "0.1.0"
+dependencies = [
+ "cm0_atomic 0.1.0 (git+https://github.com/AltOS-Rust/cm0-atomic)",
+]
+
+[[package]]
+name = "free_list_allocator"
+version = "0.1.0"
+dependencies = [
+ "altos-macros 0.1.0",
+ "cm0_atomic 0.1.0 (git+https://github.com/AltOS-Rust/cm0-atomic)",
+ "cm0_sync 0.1.0",
+]
+
+[[package]]
+name = "volatile-ptr"
+version = "0.1.0"
+source = "git+https://github.com/AltOS-Rust/volatile#a6c4b3d8393017d8db85e71deee8867ea2476f1e"
+
+[metadata]
+"checksum cm0_atomic 0.1.0 (git+https://github.com/AltOS-Rust/cm0-atomic)" = "<none>"
+"checksum volatile-ptr 0.1.0 (git+https://github.com/AltOS-Rust/volatile)" = "<none>"
