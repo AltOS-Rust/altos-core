@@ -20,7 +20,7 @@
 //! This module contains functionality for scheduling tasks to run and scheduler initialization.
 
 use task::{self, TaskControl, Delay, Priority, State};
-use queue::{SyncQueue, Node};
+use collections::{SyncQueue, Node};
 use alloc::boxed::Box;
 use core::ops::Index;
 use task::NUM_PRIORITIES;

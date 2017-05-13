@@ -38,7 +38,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::SortedList;
+    /// use altos_core::collections::SortedList;
     ///
     /// let list = SortedList::<usize>::new();
     /// ```
@@ -55,7 +55,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
+    /// use altos_core::collections::{Node, SortedList};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut list = SortedList::new();
@@ -95,7 +95,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
+    /// use altos_core::collections::{Node, SortedList};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut list = SortedList::new();
@@ -121,7 +121,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
+    /// use altos_core::collections::{Node, SortedList};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut list = SortedList::new();
@@ -159,7 +159,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
+    /// use altos_core::collections::{Node, SortedList};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut list1 = SortedList::new();
@@ -173,7 +173,7 @@ impl<T: PartialOrd> SortedList<T> {
     pub fn merge(&mut self, list: SortedList<T>) {
         // TODO: Figure out a more efficient way to do this (the other list is in sorted order
         // after all...)
-        for item in list.into_iter() {
+        for item in list {
             self.insert(item);
         }
     }
@@ -185,7 +185,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
+    /// use altos_core::collections::{Node, SortedList};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut list = SortedList::new();
@@ -209,7 +209,7 @@ impl<T: PartialOrd> SortedList<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::SortedList;
+    /// use altos_core::collections::SortedList;
     ///
     /// let list = SortedList::<usize>::new();
     ///
@@ -220,35 +220,12 @@ impl<T: PartialOrd> SortedList<T> {
         self.head.is_none()
     }
 
-    /// Returns an iterator over the values of the list.
-    ///
-    /// # Examples
-    ///
-    /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
-    /// use altos_core::alloc::boxed::Box;
-    ///
-    /// let mut list = SortedList::new();
-    /// list.insert(Box::new(Node::new(1)));
-    /// list.insert(Box::new(Node::new(2)));
-    /// list.insert(Box::new(Node::new(3)));
-    ///
-    /// let mut iter = list.into_iter();
-    /// assert_eq!(iter.next().map(|n| **n), Some(1));
-    /// assert_eq!(iter.next().map(|n| **n), Some(2));
-    /// assert_eq!(iter.next().map(|n| **n), Some(3));
-    /// assert!(iter.next().is_none());
-    /// ```
-    pub fn into_iter(self) -> IntoIter<T> {
-        IntoIter(self)
-    }
-
     /// Returns an iterator of references over the list.
     ///
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, SortedList};
+    /// use altos_core::collections::{Node, SortedList};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut list = SortedList::new();
@@ -264,6 +241,15 @@ impl<T: PartialOrd> SortedList<T> {
     /// ```
     pub fn iter(&self) -> Iter<T> {
         Iter { next: self.head.as_ref().map(|node| &**node) }
+    }
+}
+
+impl<T: PartialOrd> IntoIterator for SortedList<T> {
+    type Item = Box<Node<T>>;
+    type IntoIter = IntoIter<T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter(self)
     }
 }
 

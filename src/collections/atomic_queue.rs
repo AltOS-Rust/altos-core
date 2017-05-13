@@ -16,7 +16,7 @@
 */
 
 //! A synchronized wrapper around the Queue struct.
-use queue::{Queue, Node};
+use collections::{Queue, Node};
 use alloc::boxed::Box;
 use sync::{SpinMutex, SpinGuard};
 

@@ -31,7 +31,7 @@ use args::Args;
 #[doc(hidden)]
 pub fn init_idle_task() {
     use sched::PRIORITY_QUEUES;
-    use queue::Node;
+    use collections::Node;
     use alloc::boxed::Box;
     const INIT_TASK_STACK_SIZE: usize = 256;
 

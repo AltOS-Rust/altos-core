@@ -321,7 +321,7 @@ impl TaskControl {
     ///
     /// Set a task to the `Ready` state from the `Blocked` state.
     pub fn wake(&mut self) {
-        debug_assert!(self.state == State::Blocked);
+        debug_assert_eq!(self.state, State::Blocked);
         self.set_ready();
         self.wchan = 0;
         self.delay = 0;
@@ -332,7 +332,7 @@ impl TaskControl {
     /// The task will sleep on `wchan` until woken up. If a wake signal is never received the task
     /// will never awaken.
     pub fn sleep(&mut self, wchan: usize) {
-        debug_assert!(self.state == State::Running);
+        debug_assert_eq!(self.state, State::Running);
         self.block(Delay::Sleep);
         self.wchan = wchan;
     }
@@ -342,7 +342,7 @@ impl TaskControl {
     /// The task will sleep on `wchan` until woken up or until a number of ticks > `delay` has
     /// passed. The task is guaranteed to wake up eventually.
     pub fn sleep_for(&mut self, wchan: usize, delay: usize) {
-        debug_assert!(self.state == State::Running);
+        debug_assert_eq!(self.state, State::Running);
         let ticks = ::tick::get_tick();
         self.wchan = wchan;
         self.delay = ticks.wrapping_add(delay);
@@ -402,11 +402,11 @@ impl TaskHandle {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// # use altos_core::{TaskHandle, Priority};
-    /// # use altos_core::syscall::new_task;
-    /// # use altos_core::args::Args;
+    /// use altos_core::{TaskHandle, Priority};
+    /// use altos_core::syscall::new_task;
+    /// use altos_core::args::Args;
     ///
-    /// let handle = new_task(test_task, Args::empty(), 512, Priority::Normal, "new_task_name");
+    /// let mut handle = new_task(test_task, Args::empty(), 512, Priority::Normal, "new_task_name");
     ///
     /// if handle.destroy() {
     ///   // Task was valid, now invalid
@@ -415,9 +415,7 @@ impl TaskHandle {
     ///   // Task had already been destroyed
     /// }
     ///
-    /// # fn test_task(_args: &mut Args) {
-    /// #   loop {}
-    /// # }
+    /// # fn test_task(_args: &mut Args) {}
     /// ```
     pub fn destroy(&mut self) -> bool {
         // FIXME: If the task has allocated any dynamic memory on it own, this will be leaked when
@@ -615,6 +613,8 @@ impl TaskHandle {
     ///
     /// ```rust,no_run
     /// use altos_core::syscall::new_task;
+    /// use altos_core::args::Args;
+    /// use altos_core::Priority;
     ///
     /// let handle = new_task(test_task, Args::empty(), 512, Priority::Normal, "new_task_name");
     ///
@@ -624,6 +624,8 @@ impl TaskHandle {
     /// else {
     ///   // The task has been destroyed
     /// }
+    ///
+    /// # fn test_task(_: &mut Args) {}
     ///
     /// ```
     pub fn is_valid(&self) -> bool {
