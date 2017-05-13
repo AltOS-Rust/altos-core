@@ -26,6 +26,7 @@ pub use self::queue::*;
 pub use self::atomic_queue::*;
 pub use self::sorted_list::*;
 pub use self::ringbuffer::*;
+pub use core_collections::*;
 
 use alloc::boxed::Box;
 use core::ops::{Deref, DerefMut};
@@ -47,7 +48,7 @@ impl<T> Node<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::Node;
+    /// use altos_core::collections::Node;
     ///
     /// let usize_node = Node::new(0usize);
     /// let isize_node = Node::new(0isize);

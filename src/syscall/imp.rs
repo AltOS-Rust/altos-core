@@ -18,7 +18,7 @@
 use sched::{CURRENT_TASK, SLEEP_QUEUE, DELAY_QUEUE, OVERFLOW_DELAY_QUEUE, PRIORITY_QUEUES};
 use task::{TaskHandle, TaskControl, Priority};
 use task::args::Args;
-use queue::Node;
+use collections::Node;
 use alloc::boxed::Box;
 use tick;
 use sync::{RawMutex, CondVar, CriticalSection};
@@ -82,7 +82,7 @@ pub extern "C" fn sys_sleep(wchan: usize) {
 }
 
 fn sleep(wchan: usize) {
-    debug_assert!(wchan != FOREVER_CHAN);
+    debug_assert_ne!(wchan, FOREVER_CHAN);
     // UNSAFE: Accessing CURRENT_TASK
     match unsafe { CURRENT_TASK.as_mut() } {
         Some(current) => current.sleep(wchan),
@@ -205,9 +205,8 @@ fn mutex_try_lock(lock: &RawMutex) -> bool {
     };
     match lock.try_lock(current_tid) {
         // We don't really care if we try to reacquire the lock since we're non-blocking
-        Err(LockError::AlreadyOwned) => true,
+        Ok(_) | Err(LockError::AlreadyOwned) => true,
         Err(LockError::Locked) => false,
-        Ok(_) => true,
     }
 }
 

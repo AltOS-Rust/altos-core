@@ -117,6 +117,7 @@ pub fn new_task(code: fn(&mut Args), args: Args, stack_depth: usize, priority: P
 ///
 /// ```rust,no_run
 /// use altos_core::syscall;
+/// use altos_core::args::Args;
 ///
 /// fn test_task(_args: &mut Args) {
 ///   // Do some stuff
@@ -223,7 +224,7 @@ pub fn system_tick() {
 /// # Examples
 ///
 /// ```rust,no_run
-/// use altos_core::atomic::RawMutex;
+/// use altos_core::sync::RawMutex;
 /// use altos_core::syscall::mutex_lock;
 ///
 /// let raw_mutex: RawMutex = RawMutex::new();
@@ -241,7 +242,7 @@ pub fn system_tick() {
 /// panic.
 ///
 /// ```rust,no_run
-/// use altos_core::atomic::RawMutex;
+/// use altos_core::sync::RawMutex;
 /// use altos_core::syscall::mutex_lock;
 ///
 /// let raw_mutex: RawMutex = RawMutex::new();
@@ -275,7 +276,7 @@ pub fn mutex_lock(lock: &RawMutex) {
 /// # Examples
 ///
 /// ```rust,no_run
-/// use altos_core::atomic::RawMutex;
+/// use altos_core::sync::RawMutex;
 /// use altos_core::syscall::mutex_try_lock;
 ///
 /// let raw_mutex: RawMutex = RawMutex::new();
@@ -343,17 +344,17 @@ pub fn mutex_unlock(lock: &RawMutex) {
 /// # Examples
 ///
 /// ```rust,no_run
-/// use altos_core::syscall::condvar_wait;
+/// use altos_core::syscall;
 /// use altos_core::sync::{CondVar, RawMutex};
 ///
 /// let raw_mutex: RawMutex = RawMutex::new();
 /// let cond_var: CondVar = CondVar::new();
 ///
 /// // Acquire the lock
-/// raw_mutex.lock();
+/// syscall::mutex_lock(&raw_mutex);
 ///
 /// // Wait on the condition variable
-/// condvar_wait(&cond_var, &raw_mutex);
+/// syscall::condvar_wait(&cond_var, &raw_mutex);
 /// ```
 ///
 /// # Panics
@@ -375,20 +376,20 @@ pub fn condvar_wait(condvar: &CondVar, lock: &RawMutex) {
 /// # Examples
 ///
 /// ```rust,no_run
-/// use altos_core::syscall::{condvar_wait, condvar_broadcast};
+/// use altos_core::syscall;
 /// use altos_core::sync::{CondVar, RawMutex};
 ///
 /// let raw_mutex: RawMutex = RawMutex::new();
 /// let cond_var: CondVar = CondVar::new();
 ///
 /// // Acquire the lock
-/// raw_mutex.lock();
+/// syscall::mutex_lock(&raw_mutex);
 ///
 /// // Wait on the condition variable
-/// condvar_wait(&cond_var, &raw_mutex);
+/// syscall::condvar_wait(&cond_var, &raw_mutex);
 ///
 /// // From some other thread...
-/// condvar_broadcast(&cond_var);
+/// syscall::condvar_broadcast(&cond_var);
 ///
 /// // Original thread can now proceed
 /// ```

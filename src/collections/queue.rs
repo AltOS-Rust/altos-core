@@ -32,7 +32,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::Queue;
+    /// use altos_core::collections::Queue;
     ///
     /// let queue = Queue::<usize>::new();
     /// ```
@@ -50,7 +50,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();
@@ -85,7 +85,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();
@@ -112,7 +112,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();
@@ -150,7 +150,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue1 = Queue::new();
@@ -186,7 +186,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();
@@ -212,7 +212,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();
@@ -236,7 +236,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::Queue;
+    /// use altos_core::collections::Queue;
     ///
     /// let queue = Queue::<usize>::new();
     ///
@@ -251,7 +251,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();
@@ -274,7 +274,7 @@ impl<T> Queue<T> {
     /// # Examples
     ///
     /// ```rust,no_run
-    /// use altos_core::queue::{Node, Queue};
+    /// use altos_core::collections::{Node, Queue};
     /// use altos_core::alloc::boxed::Box;
     ///
     /// let mut queue = Queue::new();

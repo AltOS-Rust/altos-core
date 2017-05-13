@@ -281,7 +281,7 @@ impl<T: ?Sized> Mutex<T> {
 // while it is locked. Improper use can break the invariants of the `Mutex` and `MutexGuard` types.
 #[doc(hidden)]
 pub unsafe fn mutex_from_guard<'a, T>(guard: &MutexGuard<'a, T>) -> &'a RawMutex {
-    &guard.lock
+    guard.lock
 }
 
 impl<'mx, T: ?Sized> Deref for MutexGuard<'mx, T> {

@@ -32,6 +32,7 @@
 #![warn(missing_docs)]
 #![deny(trivial_numeric_casts)]
 #![no_std]
+#![cfg_attr(feature="cargo-clippy", allow(doc_markdown))]
 
 #[cfg(any(test, feature="test"))]
 #[macro_use]
@@ -48,7 +49,7 @@ extern crate bump_allocator as allocator;
 extern crate free_list_allocator as allocator;
 
 pub extern crate alloc;
-pub extern crate collections;
+extern crate collections as core_collections;
 #[cfg(not(target_has_atomic="ptr"))]
 pub extern crate cm0_atomic as atomic;
 pub extern crate volatile_ptr as volatile;
@@ -65,7 +66,7 @@ mod arch;
 #[path = "arch/test.rs"]
 mod arch;
 
-#[cfg(all(not(feature="test"), not(feature="cm0")))]
+#[cfg(all(not(test), not(feature="test"), not(feature="cm0")))]
 #[path = "arch/unknown.rs"]
 mod arch;
 
@@ -74,7 +75,7 @@ pub mod syscall;
 mod task;
 mod sched;
 pub mod sync;
-pub mod queue;
+pub mod collections;
 pub mod init;
 
 #[cfg(target_has_atomic="ptr")]
