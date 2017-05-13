@@ -85,6 +85,11 @@ impl RingBuffer {
     pub fn is_empty(&self) -> bool {
         self.start == self.end && !self.full
     }
+
+    /// Get the address of the buffer
+    pub fn addr(&self) -> *const u8 {
+        &self.data as *const _
+    }
 }
 
 #[cfg(test)]
@@ -141,5 +146,12 @@ mod tests {
         buffer.insert(0);
 
         assert!(!buffer.is_empty());
+    }
+
+    #[test]
+    fn test_ring_buffer_addr() {
+        let buffer = RingBuffer::new();
+
+        assert_eq!(buffer.addr(), &buffer.data as *const _);
     }
 }
